@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "B3TempoAppZaher"
 include(":app")
+ 
