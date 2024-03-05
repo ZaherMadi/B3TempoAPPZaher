@@ -10,78 +10,90 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+
 /**
  * TODO: document your custom view class.
  */
 public class DayColorView extends View {
-    private String mExampleString; // TODO: use a default from R.string...
-    private int mExampleColor = Color.RED; // TODO: use a default from R.color...
-    private float mExampleDimension = 0; // TODO: use a default from R.dimen...
-    private Drawable mExampleDrawable;
+    private String captionText;
+    private int captionTextColor = Color.BLACK;
+    private float captionTextSize = 0;
+    private int dayCircleColor = Color.GRAY;
 
-    private TextPaint mTextPaint;
-    private float mTextWidth;
-    private float mTextHeight;
+    private TextPaint textPaint;
+    private float textWidth;
+    private float textHeight;
+
+    private Paint circlePaint;
 
     public DayColorView(Context context) {
         super(context);
-        init(null, 0);
+        init(context,null, 0);
+
     }
 
     public DayColorView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init(context, attrs, 0);
+
+
     }
 
     public DayColorView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(attrs, defStyle);
+        init(context, attrs, defStyle);
+
+
     }
 
-    private void init(AttributeSet attrs, int defStyle) {
+    private void init(Context context, AttributeSet attrs, int defStyle) {
         // Load attributes
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.DayColorView, defStyle, 0);
 
-        String text = a.getString(R.styleable.DayColorView_exampleString);
-        mExampleString = text == null ? "Preview Text" : text;
-        mExampleColor = a.getColor(
-                R.styleable.DayColorView_exampleColor,
-                mExampleColor);
+        String text = a.getString(R.styleable.DayColorView_captionText);
+        captionText = text == null ? "Preview Text" : text;
+
+        captionTextColor = a.getColor(R.styleable.DayColorView_captionTextColor, captionTextColor);
         // Use getDimensionPixelSize or getDimensionPixelOffset when dealing with
         // values that should fall on pixel boundaries.
-        mExampleDimension = a.getDimension(
-                R.styleable.DayColorView_exampleDimension,
-                mExampleDimension);
+        captionTextSize = a.getDimension(R.styleable.DayColorView_captionTextSize, captionTextSize);
 
-        if (a.hasValue(R.styleable.DayColorView_exampleDrawable)) {
-            mExampleDrawable = a.getDrawable(
-                    R.styleable.DayColorView_exampleDrawable);
-            mExampleDrawable.setCallback(this);
-        }
+        dayCircleColor = a.getColor(R.styleable.DayColorView_dayCircleColor, ContextCompat.getColor(context, R.color.tempo_undecided_day_bg));
 
         a.recycle();
-
+        // Init the circle
+        circlePaint = new Paint();
+        //set up the circle
+        setCirclePaint();
         // Set up a default TextPaint object
-        mTextPaint = new TextPaint();
-        mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
-        mTextPaint.setTextAlign(Paint.Align.LEFT);
-
-        // Update TextPaint and text measurements from attributes
-        invalidateTextPaintAndMeasurements();
+        textPaint = new TextPaint();
+        setTextPaintAndMeasurements();
     }
 
-    private void invalidateTextPaintAndMeasurements() {
-        mTextPaint.setTextSize(mExampleDimension);
-        mTextPaint.setColor(mExampleColor);
-        mTextWidth = mTextPaint.measureText(mExampleString);
+    private void setTextPaintAndMeasurements() {
+        // setup a default TextPaint object
+        textPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        textPaint.setTextAlign(Paint.Align.LEFT);
+        textPaint.setTextSize(captionTextSize);
+        textPaint.setColor(captionTextColor);
 
-        Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
-        mTextHeight = fontMetrics.bottom;
+        textWidth = textPaint.measureText(captionText);
+        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        textHeight = fontMetrics.bottom;
     }
 
+    private void setCirclePaint() {
+        //init
+        circlePaint = new Paint();
+        // set up a paint object to draw circle
+        circlePaint.setStyle(Paint.Style.FILL);
+        circlePaint.setColor(dayCircleColor);
+    }
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         // TODO: consider storing these as member variables to reduce
@@ -94,48 +106,18 @@ public class DayColorView extends View {
         int contentWidth = getWidth() - paddingLeft - paddingRight;
         int contentHeight = getHeight() - paddingTop - paddingBottom;
 
-        // Draw the example drawable on top of the text.
-        if (mExampleDrawable != null) {
-            mExampleDrawable.setBounds(paddingLeft, paddingTop,
-                    paddingLeft + contentWidth, paddingTop + contentHeight);
-            mExampleDrawable.draw(canvas);
-        }
+        float cx = (float) contentWidth / 2;
+        float cy = (float) contentHeight / 2;
+        float radius = Math.min(contentHeight,contentWidth) / 2f * 0.9f;
 
+        canvas.drawCircle(cx,cy,radius, circlePaint);
         // Draw the text.
-        canvas.drawText(mExampleString,
-                paddingLeft + (contentWidth - mTextWidth) / 2,
-                paddingTop + (contentHeight + mTextHeight) / 2,
-                mTextPaint);
+        canvas.drawText(captionText,
+                paddingLeft + (contentWidth - textWidth) / 2,
+                paddingTop + (contentHeight + textHeight) / 2,
+                textPaint);
     }
 
-    /**
-     * Gets the example string attribute value.
-     *
-     * @return The example string attribute value.
-     */
-    public String getExampleString() {
-        return mExampleString;
-    }
-
-    /**
-     * Sets the view"s example string attribute value. In the example view, this string
-     * is the text to draw.
-     *
-     * @param exampleString The example string attribute value to use.
-     */
-    public void setExampleString(String exampleString) {
-        mExampleString = exampleString;
-        invalidateTextPaintAndMeasurements();
-    }
-
-    /**
-     * Gets the example color attribute value.
-     *
-     * @return The example color attribute value.
-     */
-    public int getExampleColor() {
-        return mExampleColor;
-    }
 
     /**
      * Sets the view"s example color attribute value. In the example view, this color
@@ -144,46 +126,10 @@ public class DayColorView extends View {
      * @param exampleColor The example color attribute value to use.
      */
     public void setExampleColor(int exampleColor) {
-        mExampleColor = exampleColor;
-        invalidateTextPaintAndMeasurements();
+        captionTextColor = exampleColor;
+        setTextPaintAndMeasurements();
     }
 
-    /**
-     * Gets the example dimension attribute value.
-     *
-     * @return The example dimension attribute value.
-     */
-    public float getExampleDimension() {
-        return mExampleDimension;
-    }
 
-    /**
-     * Sets the view"s example dimension attribute value. In the example view, this dimension
-     * is the font size.
-     *
-     * @param exampleDimension The example dimension attribute value to use.
-     */
-    public void setExampleDimension(float exampleDimension) {
-        mExampleDimension = exampleDimension;
-        invalidateTextPaintAndMeasurements();
-    }
 
-    /**
-     * Gets the example drawable attribute value.
-     *
-     * @return The example drawable attribute value.
-     */
-    public Drawable getExampleDrawable() {
-        return mExampleDrawable;
-    }
-
-    /**
-     * Sets the view"s example drawable attribute value. In the example view, this drawable is
-     * drawn above the text.
-     *
-     * @param exampleDrawable The example drawable attribute value to use.
-     */
-    public void setExampleDrawable(Drawable exampleDrawable) {
-        mExampleDrawable = exampleDrawable;
-    }
 }
