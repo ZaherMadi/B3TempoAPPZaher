@@ -22,6 +22,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
+    <com.example.b3tempoappzaher.DayColorView
+        android:id="@+id/DayColorView"
+        style="@style/Base.Theme.B3TempoAppZaher"
+        android:layout_width="0dp"
+        android:layout_height="233dp"
+        app:captionText="Hello World !"
+        app:captionTextColor="@color/black"
+        app:captionTextSize="28sp"
+        app:dayCircleColor="@color/gray_400"
+        app:layout_constraintBottom_toTopOf="@+id/DayColorView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <com.example.b3tempoappzaher.DayColorView
+        android:id="@+id/DayColorView2"
+        style="@style/Base.Theme.B3TempoAppZaher"
+        android:layout_width="0dp"
+        android:layout_height="233dp"
+        app:captionText="Hello World !"
+        app:captionTextColor="@color/black"
+        app:captionTextSize="28sp"
+        app:dayCircleColor="@color/light_blue_600"
+        app:layout_constraintBottom_toTopOf="@+id/blueDaysTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DayColorView" />
+
+
     <TextView
         android:id="@+id/blueDaysTv"
         android:layout_width="0dp"
