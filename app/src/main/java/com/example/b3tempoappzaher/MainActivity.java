@@ -76,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             }
         });
     }
+    public void showHome(View view) {
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        startActivity(intent);
+    }
     public void showHistory(View view) {
         Intent intent = new Intent();
         intent.setClass(this,HistoryActivity.class);
