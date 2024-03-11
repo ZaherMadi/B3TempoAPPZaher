@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">51Tempo</string>
 
-        <string name="not_available">NA</string>
-        <string name="history_bt">Historique</string>
+    <string name="not_available">NA</string>
+    <string name="history_bt">Historique</string>
     // Text resources for TempoColor enum
     <string name="tempo_red_color_text">rouge</string>
     <string name="tempo_white_color_text">blanc</string>

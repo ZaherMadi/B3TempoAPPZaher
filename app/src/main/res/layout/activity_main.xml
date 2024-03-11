@@ -16,7 +16,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:text="Historique"
+        android:onClick="showHistory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,12 +61,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/tempo_blue_day_bg"
-        android:text="TextView"
+        android:text="@string/not_available"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/whiteDaysTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/whiteDaysTv"
@@ -76,12 +78,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/tempo_white_day_bg"
-        android:text="TextView"
+        android:text="@string/not_available"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toStartOf="@+id/redDaysTv"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/blueDaysTv"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/redDaysTv"
@@ -92,12 +95,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/tempo_red_day_bg"
-        android:text="TextView"
+        android:text="@string/not_available"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/whiteDaysTv"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        android:textAlignment="center"/>
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"

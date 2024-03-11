@@ -3,9 +3,11 @@ package com.example.b3tempoappzaher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.http.HttpResponseCache;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.net.HttpURLConnection;
 import java.time.LocalDate;
@@ -15,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     IEdfApi edfApi;
 
@@ -73,5 +75,15 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(LOG_TAG, "call to getTempoDaysColor() failed ");
             }
         });
+    }
+    public void showHistory(View view) {
+        Intent intent = new Intent();
+        intent.setClass(this,HistoryActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

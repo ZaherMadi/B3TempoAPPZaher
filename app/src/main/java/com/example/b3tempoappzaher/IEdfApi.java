@@ -22,4 +22,10 @@ public interface IEdfApi {
             @Query("TypeAlerte")String alertType);
 
     // https://particulier.edf.fr/services/rest/referentiel/historicTEMPOStore?dateBegin=2023&dateEnd=2024
+
+    @GET("services/rest/referentiel/historicTEMPOStore")
+    Call<TempoHistory> getTempoHistory(
+            @Query("dateBegin") String dateBegin,
+            @Query("dateEnd") String dateEnd
+    );
 }
