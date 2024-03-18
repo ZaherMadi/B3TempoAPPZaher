@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">51Tempo</string>
-
+    <string name="main_activity_title">Couleurs Tempo</string>
+    <string name="history_activity_title">Historique Tempo</string>
     <string name="not_available">NA</string>
     <string name="history_bt">Historique</string>
     // Text resources for TempoColor enum
@@ -8,4 +9,24 @@
     <string name="tempo_white_color_text">blanc</string>
     <string name="tempo_blue_color_text">bleu</string>
     <string name="tempo_undecided_color_text">indéterminé</string>
+
+    <!-- Text resources for day color view -->
+    <string name="dcv_tomorrow_tx">Demain</string>
+    <string name="dcv_today_tx">Aujourd\'hui</string>
+    <string name="not_set">text not set</string>
+
+    <!-- text resources for notifications -->
+    <string name="red_channel_name">Jours rouges</string>
+    <string name="red_channel_description">Alertes Tempo pour les jours rouges</string>
+    <string name="white_channel_name">Jours blancs</string>
+    <string name="white_channel_description">Alertes Tempo pour les jours blancs</string>
+    <string name="blue_channel_name">Jours bleus</string>
+    <string name="blue_channel_description">Alertes Tempo pour les jours bleus</string>
+    <string name="channel_name">51Notification</string>
+    <string name="channel_description">Notifications of 51App</string>
+
+
+    <string name="tempo_notif_title">Alerte Tempo</string>
+    <string name="tempo_notif_text">"Demain jour %s"</string>
+
 </resources>

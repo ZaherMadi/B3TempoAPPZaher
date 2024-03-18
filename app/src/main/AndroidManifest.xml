@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -14,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.B3TempoAppZaher"
         tools:targetApi="31">
+
         <activity
             android:name=".HistoryActivity"
-            android:label="@string/not_available"
+            android:label="@string/history_activity_title"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:label="@string/main_activity_title"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
